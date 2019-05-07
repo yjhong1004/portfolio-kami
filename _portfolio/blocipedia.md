@@ -13,8 +13,6 @@ short-description: Build a production quality SaaS app that allows users to crea
 
 My goal for this project was to learn how to recreate a web application similar to Wikipedia, using Ruby on Rails.
 
-
-
 ## Problem
 
 Complete these user stories:
@@ -155,4 +153,4 @@ This is where I will put my heroku link.
 Some major programming skills that I've learned throught this project:
 Authorization: Implementing user sign up and sign in actions.
 Authentication: creating different user roles and determining which role can access certain functions.
-Utilization of gems like Devise, Pundit, Faker, and Stripe. 
+Utilization of gems like Devise, Pundit, Faker, and Stripe.
