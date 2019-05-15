@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Design Focus
+title: Design Focused Assignment
 ---
 I was recently connected with a marketing and social media services company. It was in demand for a new web developer. As part of their interview process, they had asked me to present to them how I would redesign their website. Here is a small example of what I had in mind. The entire website is not complete, but you'll get the idea.
 
@@ -728,11 +728,6 @@ section .companyimage2{
 }
 ```
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe> 
+For your convenience, I've added a little screen recording to show my website. 
 
-
-> Suspendisse lectus leo, consectetur in tempor sit amet, placerat quis neque
-
-Etiam luctus porttitor lorem, sed suscipit est rutrum non. Curabitur lobortis nisl a enim congue semper. Aenean commodo ultrices imperdiet. Vestibulum ut justo vel sapien venenatis tincidunt.
-
-Phasellus eget dolor sit amet ipsum dapibus condimentum vitae quis lectus. Aliquam ut massa in turpis dapibus convallis. Praesent elit lacus, vestibulum at malesuada et, ornare et est. Ut augue nunc, sodales ut euismod non, adipiscing vitae orci. Mauris ut placerat justo. Mauris in ultricies enim. Quisque nec est eleifend nulla ultrices egestas quis ut quam. Donec sollicitudin lectus a mauris pulvinar id aliquam urna cursus. Cras quis ligula sem, vel elementum mi. Phasellus non ullamcorper urna.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Bc5UEAwOEh8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
