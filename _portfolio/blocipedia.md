@@ -9,13 +9,17 @@ short-description: Build a production quality SaaS app that allows users to crea
 {:.center}
 ![]({{ site.baseurl }}/img/blocipedia.png)
 
+## Summary
+
+Blocipedia is a web application that allows users to share information. It is similar to Wikipedia, which is an online encyclopedia, created by volunteers around the world.
+
 ## Explanation
 
-My goal for this project was to learn how to recreate a web application similar to Wikipedia, using Ruby on Rails.
+My goal for this project was to learn how to create a basic Ruby on Rails application and to utilize different Ruby gems.
 
 ## Problem
 
-Complete these user stories:
+Ruby on Rails is a Model-View-Controller framework. This allows us to build our application with user stories in mind. We want to accomplish the following user stories:
 
 1. As a user, I want to sign up for a free account by providing a username, password and email
 2. As a user, I want to sign in and out of Blocipedia
@@ -29,25 +33,7 @@ Complete these user stories:
 
 ## Solution
 
-1. As a user, I want to sign up for a free account by providing a username, password and email
-2. As a user, I want to sign in and out of Blocipedia
-
-The first thing I did was to create a basic user scheme for a Ruby on Rails application. This was done by implementing user authentication. I would be able to give the users of a Ruby on Rails application the ability to sign up for the application using the Devise gem. Although I can utilize CRUD to create users and to authenticate user, the Devise gem worked amazingly well in doing all of the heavy work for me.
-
-
-3. As a user with a standard account, I want to create, read, update, and delete public wikis:
-In order to complete this user story, I created a Wiki controller and its accompanying views.
-
-```
-class WikisController < ApplicationController
-  def index
-    @wikis = policy_scope(Wiki)
-  end
-  ...
-```
-4. As a developer, I want to offer three user roles: admin, standard, or premium
-
-There is a clear distinction between authorization and authentication. The latter was completed in the first user story. We'll now focus on the the former. Authorization allows certain classes of users to be able to do certain actions. We accomplish this using the Pundit gem. Before we fully implement authorization, we want to create these classes of users. We first add a standard user role in the user model.
+Let's take a look at our first user story. We want our users to be able to sign up for an account using their email address. In other words, we want to authenticate our users. Although we can go through our CRUD actions to implement authentication, the easiest way to accomplish this is to utilize our Devise gem. This gem also takes care of our sign in/sign out functions for our users. Now that we have our users authenticated, we want to authorize our users to be able to create, read, update, and delete public wikis. We want to create different roles for our users to authorize certain functions for certain roles. We want to offer three roles: admin, standard, and premium. We have another amazing gem to use to help with our authorization process, called Pundit.
 
 ```
 after_initialize :init
@@ -56,15 +42,15 @@ after_initialize :init
   end
   enum role: [:standard, :admin, :premium]
 ```
-Once we implement the roles for users, we utilize the pundit gem to authorize all users access to the index view (collection of wikis). Standard signed in users to new/create/edit/update actions. We also allow wiki owners to delete their own wikis.
+After we implement authorization, we want to use seed data to test out our application. We have another great gem, called Faker, that creates fake data for us automatically.
 
-5. As a developer, I want to seed the development database automatically with users and wikis
+Up to this point of the application, we have our foundation: we have our users and their ability to create wikis.
 
-This user story allows us to utilize the Faker gem to generate fake data for users and wikis.
+We want to take it even further. We have two other user roles that we can implement. Our premium role for users should provide users with special privileges. We want to upgrade our users to a paid plan to access the premium features.
 
-6. As a user, I want to upgrade my account from a free to a paid plan
+Going from the standard free plan to a premium paid plan is a bit complicated. So we can create a user flow to help things along.
 
-This is where we are introduced to the premium user role. We first determined a user flow. An example of a user flow for this app:
+An example of a user flow for this app:
 
 ```
 1. The user signs up for a free plan.
@@ -73,7 +59,7 @@ This is where we are introduced to the premium user role. We first determined a 
 4. The user is able to create private wikis.
 ```
 
-We use Stripe to charge users to change their role from standard to premium. If we have the ability to upgrade a user's role to premium, we should also be able to downgrade a user back to the standard role. This is best included in the User model.
+We use Stripe to charge users to change their role from standard to premium. If we have the ability to upgrade a user's role to premium, we should also be able to downgrade a user back to the standard role.
 
 ```
 def downgrade
@@ -82,9 +68,8 @@ def downgrade
 end
 ```
 
-7. As a premium user, I want to create private wikis:
-
-In order to accomplish this user story, I need a way to change premium users' wikis to private. We implement a form in the wikis views, which will only be shown to admin and premium users.
+One privilege for premium users is the ability to create private wikis.
+We implement a form in the wikis views, which will only be shown to admin and premium users, through the help of Pundit.
 
 ```
 <% if current_user.admin? || current_user.premium? %>
@@ -96,28 +81,7 @@ In order to accomplish this user story, I need a way to change premium users' wi
 <% end %>
 ```
 
-In my wiki policy, I would authorize
-
-```
-def resolve
-      if user.nil? || user.standard?
-        scope.where(private: [false, nil])
-      elsif user.admin? || user.premium?
-        scope.where(private: [false, nil, true])
-      end
-    end
-  end
-```
-
-8. As a user, I want to edit wikis using Markdown syntax:
-
-I installed the redcarpet gem to utilize the Markdown syntax. I then implement it in the wiki show view.
-
-9. As a premium user, I want to add and remove collaborators for my private wikis:
-
-I developed the create and destroy functions for wiki collaborators in the Collaborators Controller. The create function is connected to the new wiki view. In the new wiki view, the premium user would have an option to add collaborators using the create function.
-
-We also updated the wiki policy so that we can allow only certain users the ability to create and destroy collaborators.
+We want our premium users to be able to add and remove collaborators to their privated wikis. In order to accomplish this user story, we developed the create and destroy functions for wiki collaborators in the Collaborators Controller. The create function is connected to the new wiki view. In the new wiki view, the premium user would have an option to add collaborators using the create function. We also updated the wiki policy so that we can allow only certain users the ability to create and destroy collaborators.
 
 ```
 attr_reader :user, :scope
@@ -145,7 +109,6 @@ attr_reader :user, :scope
 ## Results
 
 This is where I will put my heroku link.
-
 
 
 ## Conclusion
